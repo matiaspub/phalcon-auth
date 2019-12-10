@@ -6,6 +6,7 @@ Simple Phalcon Micro Auth App
 
 ### setup
 `cp .env-example .env`
+`cp users/config-example.ini config.ini`
 
 ### run
 `docker-compose up -d`
