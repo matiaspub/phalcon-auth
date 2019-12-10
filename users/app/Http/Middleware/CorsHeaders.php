@@ -4,8 +4,6 @@
 namespace App\Http\Middleware;
 
 
-use App\Http\Controllers\ControllerBase;
-use App\Http\Exceptions\Http204Exception;
 use Phalcon\Mvc\Micro;
 use Phalcon\Mvc\Micro\MiddlewareInterface;
 
@@ -25,11 +23,15 @@ class CorsHeaders implements MiddlewareInterface
      */
     public function call(Micro $app)
     {
-        $origin = $app->request->hasHeader("ORIGIN") ? $app->request->getHeader("ORIGIN") : '*';
+        $allowedOrigins = $app->config->cors->allowedOrigins->toArray();
+        $origin = $app->request->getHeader('Origin');
 
-        $app->response->setHeader("Access-Control-Allow-Origin", $origin)
+        if (in_array($origin, $allowedOrigins)) {
+            $app->response->setHeader("Access-Control-Allow-Origin", $origin);
+        }
+        $app->response
             ->setHeader("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE,OPTIONS')
-            ->setHeader("Access-Control-Allow-Headers", 'Origin, X-Requested-With, Content-Range, Content-Disposition, Content-Type, Authorization')
+            ->setHeader("Access-Control-Allow-Headers", 'X-Requested-With, Content-Type, Authorization')
             ->setHeader("Access-Control-Allow-Credentials", true);
 
         $app->response->sendHeaders();
