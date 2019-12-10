@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+/**
+ * @method static Users|\Phalcon\Mvc\Model\ResultInterface findFirstByLogin($login)
+ */
 class Users extends \Phalcon\Mvc\Model
 {
 
