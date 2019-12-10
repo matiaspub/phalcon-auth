@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Site</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<div class="page-content page-container" id="page-content">
+    <div class="padding d-flex justify-content-center">
+        <div class="modal-dialog d-flex flex-column" role="document">
+            <div class="alert-bag">
+                <div class="alert alert-danger d-none auth-danger">
+                    неверный логин или пароль
+                </div>
+                <div class="alert alert-success d-none auth-success">
+                    успешная авторизация
+                </div>
+            </div>
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h5 class="modal-title" id="exampleModalLabel">Авторизация</h5>
+                    <div class="lds-facebook" style="display: none;"><div></div><div></div><div></div></div>
+                </div>
+                <div class="modal-body">
+                    <form action="http://localhost:1181/user/login" method="GET" class="auth-form">
+                        <div class="form-group">
+                            <label for="auth-login" class="col-form-label">Логин:</label>
+                            <input type="text" required class="form-control" id="auth-login" name="login">
+                        </div>
+                        <div class="form-group">
+                            <label for="auth-password" class="col-form-label">Пароль:</label>
+                            <input type="password" required class="form-control" id="auth-password" name="password">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Войти</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="/app.js"></script>
+</body>
+</html>

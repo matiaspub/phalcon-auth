@@ -1,0 +1,62 @@
+version: '3.1'
+
+services:
+
+  site:
+    image: nginx:latest
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - ./site:/usr/share/nginx/html${VOLUMES_FLAG}
+    networks:
+      - frontend
+      - backend
+    links:
+      - users
+
+  php:
+    build:
+      context: ./users
+      args:
+        - PHALCON_VERSION=${PHALCON_VERSION}
+    restart: always
+    volumes:
+      - ./users:/var/www/html${VOLUMES_FLAG}
+    networks:
+      - backend
+
+  users:
+    image: nginx:latest
+    ports:
+      - "1181:1181"
+    volumes:
+      - ./users:/var/www/html${VOLUMES_FLAG}
+      - ./users/nginx.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - frontend
+      - backend
+    depends_on:
+      - php
+
+  tools:
+    build:
+      context: ./tools
+      args:
+        - PHALCON_VERSION=${PHALCON_VERSION}
+        - PHALCON_DEVTOOLS_VERSION=${PHALCON_DEVTOOLS_VERSION}
+    volumes:
+      - ./users:/var/www/html${VOLUMES_FLAG}
+    networks:
+      - backend
+
+
+networks:
+  frontend:
+    driver: ${NETWORKS_DRIVER}
+  backend:
+    driver: ${NETWORKS_DRIVER}
+
+volumes:
+  sqlite:
+    driver: ${VOLUMES_DRIVER}
