@@ -1,6 +1,9 @@
 # phalcon-auth
 Simple Phalcon Micro Auth App
 
+### get
+`git clone https://github.com/matiaspub/phalcon-auth.git`
+
 ### setup
 `cp .env-example .env`
 
@@ -11,4 +14,4 @@ Simple Phalcon Micro Auth App
 `docker-compose exec tools phalcon migration run`
 
 ### browse
-[open](http://localhost/user)
+[open](http://localhost)
